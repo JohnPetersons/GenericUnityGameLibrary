@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace GenericUnityGame {
     public class GameSystem {
-        private static Dictionary<string, List<GameEventListener>> eventListeners;
-        private static List<GameEvent> events;
-        private static Dictionary<string, GameDataGeneric> data;
-        private static Dictionary<string, double> timeMultipliers;
+        private static Dictionary<string, List<GameEventListener>> eventListeners = new Dictionary<string, List<GameEventListener>>();
+        private static List<GameEvent> events = new List<GameEvent>();
+        private static Dictionary<string, GameDataGeneric> data = new Dictionary<string, GameDataGeneric>();
+        private static Dictionary<string, double> timeMultipliers = new Dictionary<string, double>();
 
-        public static void Start() {
+        public static void Refresh() {
             GameSystem.eventListeners = new Dictionary<string, List<GameEventListener>>();
             GameSystem.events = new List<GameEvent>();
             GameSystem.data = new Dictionary<string, GameDataGeneric>();
@@ -35,6 +35,10 @@ namespace GenericUnityGame {
             foreach(string tag in tags) {
                 eventListeners[tag].Remove(eventListener);
             }
+        }
+
+        public static void RemoveGameEventListener(string tag, GameEventListener eventListener) {
+            eventListeners[tag].Remove(eventListener);
         }
 
         public static bool GameDataIsType(string tag, Type t) {

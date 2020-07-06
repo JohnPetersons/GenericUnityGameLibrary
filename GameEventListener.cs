@@ -29,6 +29,13 @@ namespace GenericUnityGame {
             }
         }
 
+        public void StopListeningTo(string tag) {
+            if (this.listeningTo.Contains(tag)) {
+                this.listeningTo.Remove(tag);
+                GameSystem.RemoveGameEventListener(tag, this);
+            }
+        }
+
         public void Destroy() {
             GameSystem.SetGameData<GameEventListener>(this.listenerId, null);
             GameSystem.RemoveGameEventListener(this.listeningTo, this);
