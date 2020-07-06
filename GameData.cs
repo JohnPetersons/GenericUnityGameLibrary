@@ -4,22 +4,22 @@ using System.Collections.Generic;
 namespace GenericUnityGame {
     public class GameData<T>: GameDataGeneric {
         
-        private T data;
+        private T gameData;
 
-        public GameData(T data) {
-            this.data = data;
+        public GameData(T gameData) {
+            this.gameData = gameData;
         }
 
         public Type GetDataType() {
-            return data.GetType();
+            return typeof(T);
         }
 
         public T GetData() {
-            return data;
+            return gameData;
         }
 
-        public void SetData(T data) {
-            this.data = data;
+        public void SetData(T gameData) {
+            this.gameData = gameData;
         }
     }
 }

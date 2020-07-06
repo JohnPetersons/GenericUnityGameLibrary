@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GenericUnityGame {
     public class GameSystem {
@@ -41,18 +42,15 @@ namespace GenericUnityGame {
             eventListeners[tag].Remove(eventListener);
         }
 
-        public static bool GameDataIsType(string tag, Type t) {
-            if (data.ContainsKey(tag) && data[tag].GetDataType() == t) {
+        public static bool GameDataIsType<T>(string tag) {
+            if (data.ContainsKey(tag) && data[tag].GetDataType().Equals(typeof(T))) {
                 return true;
             }
             return false;
         }
 
         public static void SetGameData<T>(string tag, T gameData) {
-            if (gameData == null || !(data[tag].GetDataType() is T)) {
-                data.Remove(tag);
-            } 
-            if (!data.ContainsKey(tag) && gameData != null) {
+            if (!data.ContainsKey(tag)) {
                 data.Add(tag, new GameData<T>(gameData));
             } else {
                 ((GameData<T>)data[tag]).SetData(gameData);
@@ -63,7 +61,7 @@ namespace GenericUnityGame {
             if (data.ContainsKey(tag)) {
                 if (data[tag] == null) {
                     data.Remove(tag);
-                } else if (data[tag].GetDataType() is T){
+                } else if (data[tag].GetDataType().Equals(typeof(T))){
                     return ((GameData<T>)data[tag]).GetData();
                 }
             }
