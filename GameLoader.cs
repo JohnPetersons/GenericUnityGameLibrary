@@ -10,6 +10,7 @@ namespace GenericUnityGame {
     */
     public class GameLoader {
         
+        private static List<GameObject> loaded = new List<GameObject>();
         private static string fileFolder = "Loadfiles/";
         private static string prefabsFolder = "Prefabs/";
         public static void LoadFile(string file) {
@@ -57,6 +58,13 @@ namespace GenericUnityGame {
                 resourceText = resourceText.Substring(resourceText.IndexOf(",") + 1);
                 float z = float.Parse(resourceText.Substring(0));
                 go.transform.position = new Vector3(x, y, z);
+            }
+            loaded.Add(go);
+        }
+
+        private static void RemoveLoaded() {
+            foreach(GameObject go in loaded) {
+                GameObject.Destroy(go);
             }
         }
     }

@@ -12,9 +12,13 @@ namespace GenericUnityGame {
         private string listenerId;
         private static int nextListenerId = 0;
 
+        void Start() {
+            this.Begin();
+        }
+
         // Start is called before the first frame update
-        // In extended classes call base.Start()
-        void Start()  {
+        // In extended classes call base.Begin()
+        public void Begin()  {
             this.listeningTo = new List<string>();
             this.listenerId = "listener" + GameEventListener.nextListenerId;
             GameSystem.SetGameData<GameEventListener>(this.listenerId, this);
@@ -24,7 +28,15 @@ namespace GenericUnityGame {
 
         // Update is called once per frame
         void Update() {
-            
+            this.Tick();
+        }
+
+        public void Tick() {
+
+        }
+
+        public string GetListenerId() {
+            return this.listenerId;
         }
 
         public void ListenTo(string tag) {
