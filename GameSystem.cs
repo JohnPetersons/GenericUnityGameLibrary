@@ -84,6 +84,7 @@ namespace GenericUnityGame {
         }
 
         public static void Update() {
+            DateTime startTime = DateTime.Now;
             while (events.Count > 0) {
                 List<GameEvent> currentEvents = events;
                 events = new List<GameEvent>();
@@ -93,6 +94,11 @@ namespace GenericUnityGame {
                             listener.HandleGameEvent(ge);
                         }
                     }
+                }
+                if(DateTime.Now.Subtract(startTime).TotalMilliseconds > 999) {
+                    events = new List<GameEvent>();
+                    Debug.Log("Infinite Loop broken");
+                    break;
                 }
             }
         }

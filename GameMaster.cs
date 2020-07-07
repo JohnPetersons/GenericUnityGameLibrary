@@ -5,12 +5,13 @@ using UnityEngine;
 namespace GenericUnityGame {
    public class GameMaster : MonoBehaviour {
         // Start is called before the first frame update
-        public static const bool TEST = true;
+        public const bool TEST = true;
 
         void Start() {
             if (GameMaster.TEST) {
                 this.Tests();
             }
+            GameLoader.LoadFile("MainMenu");
         }
 
         // Update is called once per frame
@@ -19,6 +20,7 @@ namespace GenericUnityGame {
         }
 
         private void Tests() {
+            Debug.Log("tests");
             GameSystem.SetGameData<string>("testString", "testString");
             if (!GameSystem.GameDataIsType<string>("testString")) {
                 Debug.Log("GameDataIsType Failure: string");
@@ -35,9 +37,10 @@ namespace GenericUnityGame {
                 Debug.Log("GetGameData Failure: bool");
             }
 
-            GameLoader.Load("TestLoader");
-            
-            new GameEvent("listener0", "test", new GameData<string>("test"));
+            GameLoader.LoadFile("TestLoader");
+            GameLoader.Load("TestEventListener,1,1,0");
+            new TypedGameEvent<string>("listener0", "test", "test1");
+            new TypedGameEvent<string>("listener1", "test", "test2");
         }
    }
 }

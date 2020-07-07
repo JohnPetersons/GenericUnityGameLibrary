@@ -21,8 +21,8 @@ namespace GenericUnityGame {
             return this.name;
         }
 
-        public GameDataGeneric GetGameData() {
-            return this.data;
+        public K GetGameData<K>() {
+            return ((GameData<K>)data).GetData();
         }
     }
 }
