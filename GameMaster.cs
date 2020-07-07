@@ -20,27 +20,34 @@ namespace GenericUnityGame {
         }
 
         private void Tests() {
-            Debug.Log("tests");
             GameSystem.SetGameData<string>("testString", "testString");
             if (!GameSystem.GameDataIsType<string>("testString")) {
-                Debug.Log("GameDataIsType Failure: string");
-            } 
+                Debug.Log("GameDataIsType failure: string");
+            }  else {
+                Debug.Log("GameDataIsType success: string");
+            }
             if (!GameSystem.GetGameData<string>("testString").Equals("testString")) {
-                Debug.Log("GetGameData Failure: string");
+                Debug.Log("GetGameData failure: string");
+            } else {
+                Debug.Log("GetGameData success: string");
             }
             
             GameSystem.SetGameData<bool>("testBool", true);
             if (!GameSystem.GameDataIsType<bool>("testBool")) {
-                Debug.Log("GameDataIsType Failure: bool");
-            } 
+                Debug.Log("GameDataIsType failure: bool");
+            } else {
+                Debug.Log("GameDataIsType success: bool");
+            }
             if (!GameSystem.GetGameData<bool>("testBool").Equals(true)) {
-                Debug.Log("GetGameData Failure: bool");
+                Debug.Log("GetGameData failure: bool");
+            } else {
+                Debug.Log("GetGameData success: bool");
             }
 
             GameLoader.LoadFile("TestLoader");
             GameLoader.Load("TestEventListener,1,1,0");
-            new TypedGameEvent<string>("listener0", "test", "test1");
-            new TypedGameEvent<string>("listener1", "test", "test2");
+            new TypedGameEvent<string>("listener0", "test", "Load file test success");
+            new TypedGameEvent<string>("listener1", "test", "Load string test success");
         }
    }
 }
