@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GenericUnityGame {
+    /*
+    Loads prefabs by getting their name and spawn locations from either a file or a string
+    Format for each line of the file or the string is "PrefabName,x,y,z"
+    Files can include comments if the line starts with "//"
+    */
     public class GameLoader {
         
         private static string fileFolder = "Loadfiles/";
@@ -21,6 +26,10 @@ namespace GenericUnityGame {
         public static void Load(string text) {
             while(text.Length > 0) {
                 int index = text.IndexOf('\n');
+                if (text.Length > 1 && text.Substring(0, 2).Equals("//")) {
+                    text = text.Substring(index + 1);
+                    continue;
+                }
                 if (index <= 0) {
                     GameLoader.LoadResource(text.Substring(0));
                     break;

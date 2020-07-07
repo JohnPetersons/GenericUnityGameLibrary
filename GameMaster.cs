@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GenericUnityGame {
+    /*
+    Mostly just to call GameSystem.Update() and be attached to an empty GameObject.
+    Also does some basic testing to make sure I didn't break things
+    */
    public class GameMaster : MonoBehaviour {
         // Start is called before the first frame update
         public const bool TEST = true;
@@ -44,6 +48,9 @@ namespace GenericUnityGame {
                 Debug.Log("GetGameData success: bool");
             }
 
+            // These tests require you have a file called TestLoader.txt in Resources/LoadFiles/ that 
+            // contains the string: "TestEventListener" and that you have a prefab in Resources/Prefabs/ 
+            // named TestEventListener
             GameLoader.LoadFile("TestLoader");
             GameLoader.Load("TestEventListener,1,1,0");
             new TypedGameEvent<string>("listener0", "test", "Load file test success");

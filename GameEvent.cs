@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 
 namespace GenericUnityGame {
+    /*
+    Automatically adds itself to GameSystem when created, don't add a new GameEvent yourself
+    tag is the tag that GameEventListeners will be listening to
+    */
     public class GameEvent {
         private string tag, name;
         private GameDataGeneric data;

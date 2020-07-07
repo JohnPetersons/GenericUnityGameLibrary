@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 
 namespace GenericUnityGame {
+    /*
+    is used when creating a GameEvent so that you don't have to do new GameEvent(tag, name, new GameData<T>(data))
+    instead you use TypedGameEvent<T>(tag, name. data) which is cleaner to me
+    */
     public class TypedGameEvent<T>: GameEvent {
         private string tag, name;
         private GameDataGeneric data;

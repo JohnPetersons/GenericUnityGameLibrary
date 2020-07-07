@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GenericUnityGame {
+    /*
+    Extend this class instead of MonoBehaviour in order to be able to listen to events given to GameSystem
+    */
     public class GameEventListener : MonoBehaviour {
 
         private List<string> listeningTo;
@@ -10,11 +13,12 @@ namespace GenericUnityGame {
         private static int nextListenerId = 0;
 
         // Start is called before the first frame update
+        // In extended classes call base.Start()
         void Start()  {
             this.listeningTo = new List<string>();
             this.listenerId = "listener" + GameEventListener.nextListenerId;
             GameSystem.SetGameData<GameEventListener>(this.listenerId, this);
-            GameSystem.AddGameEventListener(this.listenerId, this);
+            this.ListenTo(this.listenerId);
             GameEventListener.nextListenerId++;
         }
 
@@ -37,6 +41,7 @@ namespace GenericUnityGame {
             }
         }
 
+        // In extended classes call base.Destroy()
         public void Destroy() {
             GameSystem.SetGameData<GameEventListener>(this.listenerId, null);
             GameSystem.RemoveGameEventListener(this.listeningTo, this);

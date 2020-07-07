@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GenericUnityGame {
+    /*
+    Sends events to GameEventListeners
+    Stores data that any class can reference by a tag string
+    Has a Dictionary explicitly for time multipliers
+        - Only here so that deltaTime and each multiplier can be multiplied by the default time multiplier before being returned
+        - To figure out how fast time is moving for gameplay for example you would call:
+            GameSystem.SetTimeMultiplier("gameplay", 1.0);
+            double deltaTime = GameSystem.GetTimeMultiplier("gameplay", Time.deltaTime);
+    */
     public class GameSystem {
         private static Dictionary<string, List<GameEventListener>> eventListeners = new Dictionary<string, List<GameEventListener>>();
         private static List<GameEvent> events = new List<GameEvent>();
@@ -76,9 +85,9 @@ namespace GenericUnityGame {
             }
         }
 
-        public static double GetTimeMultiplier(string tag) {
+        public static double GetTimeMultiplier(string tag, double deltaTime) {
             if (timeMultipliers.ContainsKey(tag)) {
-                return timeMultipliers[tag];
+                return deltaTime * timeMultipliers[tag] * timeMultipliers["default"];
             }
             return 0.0;
         }
@@ -95,6 +104,8 @@ namespace GenericUnityGame {
                         }
                     }
                 }
+                // In case of a loop that takes longer than 1 second assume it is an infinite loop and kill it
+                // prevents having to close unity if an infinite loop is created with events
                 if(DateTime.Now.Subtract(startTime).TotalMilliseconds > 999) {
                     events = new List<GameEvent>();
                     Debug.Log("Infinite Loop broken");
