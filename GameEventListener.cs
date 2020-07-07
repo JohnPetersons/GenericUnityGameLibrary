@@ -43,7 +43,7 @@ namespace GenericUnityGame {
         }
 
         public void HandleGameEvent(GameEvent gameEvent) {
-            if (gameEvent.GetName().Equals("test")) {
+            if (GameMaster.TEST && gameEvent.GetName().Equals("test")) {
                 Debug.Log("success");
             }
         }

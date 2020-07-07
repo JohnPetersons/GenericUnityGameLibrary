@@ -5,10 +5,10 @@ using UnityEngine;
 namespace GenericUnityGame {
    public class GameMaster : MonoBehaviour {
         // Start is called before the first frame update
-        private bool test = true;
+        public static const bool TEST = true;
 
         void Start() {
-            if (this.test) {
+            if (GameMaster.TEST) {
                 this.Tests();
             }
         }
