@@ -14,6 +14,7 @@ namespace GenericUnityGame {
             this.listeningTo = new List<string>();
             this.listenerId = "listener" + GameEventListener.nextListenerId;
             GameSystem.SetGameData<GameEventListener>(this.listenerId, this);
+            GameSystem.AddGameEventListener(this.listenerId, this);
             GameEventListener.nextListenerId++;
         }
 
@@ -42,7 +43,9 @@ namespace GenericUnityGame {
         }
 
         public void HandleGameEvent(GameEvent gameEvent) {
-
+            if (gameEvent.GetName().Equals("test")) {
+                Debug.Log("success");
+            }
         }
     }
 }

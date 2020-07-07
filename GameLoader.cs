@@ -6,6 +6,7 @@ namespace GenericUnityGame {
     public class GameLoader {
         
         private static string fileFolder = "Loadfiles/";
+        private static string prefabsFolder = "Prefabs/";
         public static void Load(string file) {
             string fileText = Resources.Load<TextAsset>(GameLoader.fileFolder + file).text;
             int index = 0;
@@ -22,7 +23,7 @@ namespace GenericUnityGame {
         }
 
         private static void LoadResource(string resourceText) {
-            Debug.Log(resourceText);
+            GameObject go = GameObject.Instantiate(Resources.Load(GameLoader.prefabsFolder + resourceText) as GameObject);
         }
     }
 }

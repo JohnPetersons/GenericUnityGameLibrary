@@ -35,7 +35,9 @@ namespace GenericUnityGame {
                 Debug.Log("GetGameData Failure: bool");
             }
 
-            GameLoader.Load("MainMenu");
+            GameLoader.Load("TestLoader");
+            
+            new GameEvent("listener0", "test", new GameData<string>("test"));
         }
    }
 }

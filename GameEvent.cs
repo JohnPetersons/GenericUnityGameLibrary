@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace GenericUnityGame {
     public class GameEvent {
         private string tag, name;
-        private GameData<object> data;
+        private GameDataGeneric data;
 
-        public GameEvent(string tag, string name, GameData<object> data) {
+        public GameEvent(string tag, string name, GameDataGeneric data) {
             this.tag = tag;
             this.name = name;
             this.data = data;
@@ -21,7 +21,7 @@ namespace GenericUnityGame {
             return this.name;
         }
 
-        public GameData<object> GetGameData() {
+        public GameDataGeneric GetGameData() {
             return this.data;
         }
     }

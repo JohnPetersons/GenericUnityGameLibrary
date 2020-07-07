@@ -88,8 +88,10 @@ namespace GenericUnityGame {
                 List<GameEvent> currentEvents = events;
                 events = new List<GameEvent>();
                 foreach(GameEvent ge in currentEvents) {
-                    foreach(GameEventListener listener in eventListeners[ge.GetTag()]) {
-                        listener.HandleGameEvent(ge);
+                    if (eventListeners.ContainsKey(ge.GetTag())) {
+                        foreach(GameEventListener listener in eventListeners[ge.GetTag()]) {
+                            listener.HandleGameEvent(ge);
+                        }
                     }
                 }
             }
