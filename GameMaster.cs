@@ -34,6 +34,8 @@ namespace GenericUnityGame {
             if (!GameSystem.GetGameData<bool>("testBool").Equals(true)) {
                 Debug.Log("GetGameData Failure: bool");
             }
+
+            GameLoader.Load("MainMenu");
         }
    }
 }
