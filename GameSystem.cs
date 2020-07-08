@@ -15,13 +15,13 @@ namespace GenericUnityGame {
     public class GameSystem {
         private static Dictionary<string, List<GameEventListener>> eventListeners = new Dictionary<string, List<GameEventListener>>();
         private static List<GameEvent> events = new List<GameEvent>();
-        private static Dictionary<string, GameDataGeneric> data = new Dictionary<string, GameDataGeneric>();
+        private static Dictionary<string, GameData> data = new Dictionary<string, GameData>();
         private static Dictionary<string, double> timeMultipliers = new Dictionary<string, double>();
 
         public static void Refresh() {
             GameSystem.eventListeners = new Dictionary<string, List<GameEventListener>>();
             GameSystem.events = new List<GameEvent>();
-            GameSystem.data = new Dictionary<string, GameDataGeneric>();
+            GameSystem.data = new Dictionary<string, GameData>();
             GameSystem.timeMultipliers = new Dictionary<string, double>();
             GameSystem.timeMultipliers.Add("default", 1.0);
         }
@@ -60,9 +60,9 @@ namespace GenericUnityGame {
 
         public static void SetGameData<T>(string tag, T gameData) {
             if (!data.ContainsKey(tag)) {
-                data.Add(tag, new GameData<T>(gameData));
+                data.Add(tag, new TypedGameData<T>(gameData));
             } else {
-                ((GameData<T>)data[tag]).SetData(gameData);
+                ((TypedGameData<T>)data[tag]).SetData(gameData);
             }
         }
 
@@ -71,7 +71,7 @@ namespace GenericUnityGame {
                 if (data[tag] == null) {
                     data.Remove(tag);
                 } else if (data[tag].GetDataType().Equals(typeof(T))){
-                    return ((GameData<T>)data[tag]).GetData();
+                    return ((TypedGameData<T>)data[tag]).GetData();
                 }
             }
             return default(T);

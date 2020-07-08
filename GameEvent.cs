@@ -8,9 +8,9 @@ namespace GenericUnityGame {
     */
     public class GameEvent {
         private string tag, name;
-        private GameDataGeneric data;
+        private GameData data;
 
-        public GameEvent(string tag, string name, GameDataGeneric data) {
+        public GameEvent(string tag, string name, GameData data) {
             this.tag = tag;
             this.name = name;
             this.data = data;
@@ -26,7 +26,7 @@ namespace GenericUnityGame {
         }
 
         public K GetGameData<K>() {
-            return ((GameData<K>)data).GetData();
+            return ((TypedGameData<K>)data).GetData();
         }
     }
 }
