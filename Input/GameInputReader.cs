@@ -11,8 +11,8 @@ namespace GenericUnityGame {
         private static readonly string[] buttonInputs = {"a", "b", "x", "y", "leftTrigger", "leftBumper", "rightTrigger", "rightBumper", "start", "select"};
         private static readonly string[] axisInputs = {"leftStickUpDown", "rightStickUpDown", "leftStickLeftRight", "rightStickLeftRight", "dPadUpDown", "dPadLeftRight"};
         private Dictionary<string, string> inputMapping = new Dictionary<string, string>();
-        private string playerNumber;
-        private int playerInput;
+        private int playerNumber;
+        private string playerInput;
         public new void Begin() {
             base.Begin();
         }

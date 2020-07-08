@@ -85,11 +85,33 @@ namespace GenericUnityGame {
             }
         }
 
-        public static double GetTimeMultiplier(string tag, double deltaTime) {
+        public static double GetTimeMultiplier(string tag) {
             if (timeMultipliers.ContainsKey(tag)) {
-                return deltaTime * timeMultipliers[tag] * timeMultipliers["default"];
+                return timeMultipliers[tag];
             }
             return 0.0;
+        }
+
+        public static double GetDeltaTime(double deltaTime) {
+            return deltaTime * timeMultipliers["default"];
+        }
+
+        public static double GetDeltaTime(string tag, double deltaTime) {
+            double result = GameSystyem.GetDeltaTime(deltaTime);
+            if (timeMultipliers.ContainsKey(tag)) {
+                result *= timeMultipliers[tag];
+            }
+            return result;
+        }
+
+        public static double GetDeltaTime(List<string> tags, double deltaTime) {
+            double result = GameSystyem.GetDeltaTime(deltaTime);
+            foreach(string tag in tags) {
+                if (timeMultipliers.ContainsKey(tag)) {
+                    result *= timeMultipliers[tag];
+                }
+            }
+            return result;
         }
 
         public static void Update() {
