@@ -97,7 +97,7 @@ namespace GenericUnityGame {
         }
 
         public static double GetDeltaTime(string tag, double deltaTime) {
-            double result = GameSystyem.GetDeltaTime(deltaTime);
+            double result = GameSystem.GetDeltaTime(deltaTime);
             if (timeMultipliers.ContainsKey(tag)) {
                 result *= timeMultipliers[tag];
             }
@@ -105,7 +105,7 @@ namespace GenericUnityGame {
         }
 
         public static double GetDeltaTime(List<string> tags, double deltaTime) {
-            double result = GameSystyem.GetDeltaTime(deltaTime);
+            double result = GameSystem.GetDeltaTime(deltaTime);
             foreach(string tag in tags) {
                 if (timeMultipliers.ContainsKey(tag)) {
                     result *= timeMultipliers[tag];
