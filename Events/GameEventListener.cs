@@ -9,7 +9,7 @@ namespace GenericUnityGame {
     public class GameEventListener : MonoBehaviour {
 
         private List<string> listeningTo;
-        private string listenerId;
+        private string listenerId, primaryTimeMultiplier;
         private static int nextListenerId = 0;
 
         void Start() {
@@ -21,6 +21,7 @@ namespace GenericUnityGame {
         public void Begin()  {
             this.listeningTo = new List<string>();
             this.listenerId = "listener" + GameEventListener.nextListenerId;
+            this.primaryTimeMultiplier = "default";
             GameSystem.SetGameData<GameEventListener>(this.listenerId, this);
             this.ListenTo(this.listenerId);
             GameEventListener.nextListenerId++;
@@ -28,7 +29,9 @@ namespace GenericUnityGame {
 
         // Update is called once per frame
         void Update() {
-            this.Tick();
+            if (GameSystem.GetTimeMultiplier(this.primaryTimeMultiplier) != 0) {
+                this.Tick();
+            }
         }
 
         public void Tick() {
@@ -37,6 +40,14 @@ namespace GenericUnityGame {
 
         public string GetListenerId() {
             return this.listenerId;
+        }
+
+        public string GetPrimaryTimeMultiplier() {
+            return this.primaryTimeMultiplier;
+        }
+
+        public void SetPrimaryTimeMultiplier(string tag) {
+            this.primaryTimeMultiplier = tag;
         }
 
         public void ListenTo(string tag) {

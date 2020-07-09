@@ -25,7 +25,6 @@ namespace GenericUnityGame {
         public new void HandleGameEvent(GameEvent gameEvent) {
             for(int i = 0; i < currentStates.Count; i++) {
                 currentStates[i] = currentStates[i].GetNextState(gameEvent);
-                currentStates[i].setGameObject(this.gameObject);
             }
         }
     }

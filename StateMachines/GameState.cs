@@ -5,7 +5,6 @@ using UnityEngine;
 namespace GenericUnityGame {
     public class GameState
     { 
-        private GameObject gameObject;
         private Dictionary<string, GameState> states;
         private List<GameStateCondition> conds;
 
@@ -22,10 +21,6 @@ namespace GenericUnityGame {
             
         }
 
-        public void setGameObject(GameObject gameObject) {
-            this.gameObject = gameObject;
-        }
-
         public void AddStateChange(string eventName, GameState endState) {
             if (!states.ContainsKey(eventName)) {
                 states.Add(eventName, endState);
@@ -38,6 +33,12 @@ namespace GenericUnityGame {
             this.conds.Add(cond);
         }
 
+        /*
+        Two different event groups.
+        The events that trigger the first if statement will switch the state.
+        The events that are passed to the else statement are for GameStateCondtions that will usually trigger an event
+        in the Success function that sends an event that would be caught by the first if statement.
+        */
         public GameState GetNextState(GameEvent gameEvent) {
             if (states.ContainsKey(gameEvent.GetName())) {
                 states[gameEvent.GetName()].Begin();
