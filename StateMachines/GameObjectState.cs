@@ -18,7 +18,7 @@ namespace GenericUnityGame {
             base.Tick();
         }
 
-        public string GetGameObject() {
+        public GameObject GetGameObject() {
             return this.gameObject;
         }
     }
