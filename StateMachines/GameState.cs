@@ -32,7 +32,7 @@ namespace GenericUnityGame {
         public void AddGameStateCondition(GameStateCondition cond) {
             foreach(string str in cond.GetListensFor()) {
                 if (!conds.ContainsKey(str)) {
-                    this.conds.Add(new List<GameStateCondition>());
+                    this.conds.Add(str, new List<GameStateCondition>());
                 }
                 this.conds[str].Add(cond);
             }
