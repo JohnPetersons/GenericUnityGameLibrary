@@ -11,10 +11,11 @@ namespace GenericUnityGame {
     public class GameLoader {
         
         private static List<GameObject> loaded = new List<GameObject>();
-        private static string fileFolder = "Loadfiles/";
-        private static string prefabsFolder = "Prefabs/";
+        public static string FILES = "Loadfiles/";
+        public static string PREFABS = "Prefabs/";
+        public static string SPRITES = "Sprites/";
         public static void LoadFile(string file) {
-            TextAsset fileAsset = Resources.Load<TextAsset>(GameLoader.fileFolder + file);
+            TextAsset fileAsset = Resources.Load<TextAsset>(GameLoader.FILES + file);
             if (fileAsset == null) {
                 return;
             }
@@ -48,9 +49,9 @@ namespace GenericUnityGame {
             int index = resourceText.IndexOf(",");
             GameObject go;
             if (index <= 0) {
-                go = GameObject.Instantiate(Resources.Load(GameLoader.prefabsFolder + resourceText.Substring(0)) as GameObject);
+                go = GameObject.Instantiate(Resources.Load(GameLoader.PREFABS + resourceText.Substring(0)) as GameObject);
             } else {
-                go = GameObject.Instantiate(Resources.Load(GameLoader.prefabsFolder + resourceText.Substring(0, index)) as GameObject);
+                go = GameObject.Instantiate(Resources.Load(GameLoader.PREFABS + resourceText.Substring(0, index)) as GameObject);
                 resourceText = resourceText.Substring(index + 1);
                 float x = float.Parse(resourceText.Substring(0, resourceText.IndexOf(",")));
                 resourceText = resourceText.Substring(resourceText.IndexOf(",") + 1);

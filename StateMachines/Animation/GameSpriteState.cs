@@ -6,14 +6,17 @@ namespace GenericUnityGame {
     public class GameSpriteState: GameEventListenerState
     { 
         public const string TIMED_ANIMATION_CHANGE = "timedAnimationChange";
+        private Sprite sprite;
         private double startTimer, timer;
-        public GameSpriteState(string listenerId): base(listenerId) {
+        public GameSpriteState(string listenerId, string spriteName): base(listenerId) {
+            this.sprite = Resources.Load<Sprite>(GameLoader.SPRITES + spriteName);
             this.startTimer = 0.0;
             this.timer = 0.0;
         }
 
         public new void Begin() {
             base.Begin();
+            new TypedGameEvent<Sprite>(this.GetEventListenerId(), GameSpriteStateMachine.SPRITE_CHANGE, this.sprite);
         }
 
         public new void Tick() {
