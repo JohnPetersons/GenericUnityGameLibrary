@@ -6,11 +6,11 @@ namespace GenericUnityGame {
     public class GameState
     { 
         private Dictionary<string, GameState> states;
-        private List<GameStateCondition> conds;
+        private Dictionary<string, List<GameStateCondition>> conds;
 
         public GameState() {
             states = new Dictionary<string, GameState>();
-            conds = new List<GameStateCondition>();
+            conds = new Dictionary<string, List<GameStateCondition>>();
         }
 
         public void Begin() {
@@ -30,7 +30,12 @@ namespace GenericUnityGame {
         }
 
         public void AddGameStateCondition(GameStateCondition cond) {
-            this.conds.Add(cond);
+            foreach(string str in cond.GetListensFor()) {
+                if (!conds.ContainsKey(str)) {
+                    this.conds.Add(new List<GameStateCondition>());
+                }
+                this.conds[str].Add(cond);
+            }
         }
 
         /*
@@ -44,10 +49,12 @@ namespace GenericUnityGame {
                 states[gameEvent.GetName()].Begin();
                 return states[gameEvent.GetName()];
             } else {
-                foreach(GameStateCondition c in conds) {
-                    if (c.CheckCond(gameEvent)) {
-                        c.Success();
-                        break;
+                if (conds.ContainsKey(gameEvent.GetName())) {
+                    foreach(GameStateCondition c in conds[gameEvent.GetName()]) {
+                        if (c.CheckCond(gameEvent)) {
+                            c.Success();
+                            break;
+                        }
                     }
                 }
             }

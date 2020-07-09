@@ -24,7 +24,6 @@ namespace GenericUnityGame {
             if (this.startTimer >= 0) {
                 this.timer -= GameSystem.GetDeltaTime(Time.deltaTime);
                 if (this.timer <= 0) {
-                    this.timer = startTimer;
                     new TypedGameEvent<bool>(this.GetEventListenerId(), GameSpriteState.TIMED_ANIMATION_CHANGE, true);
                 }
             }
