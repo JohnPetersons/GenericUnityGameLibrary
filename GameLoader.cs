@@ -14,6 +14,7 @@ namespace GenericUnityGame {
         public static string FILES = "Loadfiles/";
         public static string PREFABS = "Prefabs/";
         public static string SPRITES = "Sprites/";
+        public static string AUDIO_CLIPS = "AudioClips/";
         public static void LoadFile(string file) {
             TextAsset fileAsset = Resources.Load<TextAsset>(GameLoader.FILES + file);
             if (fileAsset == null) {
