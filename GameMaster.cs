@@ -11,16 +11,20 @@ namespace GenericUnityGame {
         // Start is called before the first frame update
         public const bool TEST = true;
 
+        private GameLoader loader;
+
         void Start() {
+            this.loader = new GameLoader();
             if (GameMaster.TEST) {
                 this.Tests();
             }
-            GameLoader.LoadFile("MainMenu");
+            loader.LoadFile("MainMenu");
         }
 
         // Update is called once per frame
         void Update() {
             GameSystem.Update();
+            this.loader.RemoveLoaded();
         }
 
         private void Tests() {
@@ -51,8 +55,8 @@ namespace GenericUnityGame {
             // These tests require you have a file called TestLoader.txt in Resources/LoadFiles/ that 
             // contains the string: "TestEventListener" and that you have a prefab in Resources/Prefabs/ 
             // named TestEventListener
-            GameLoader.LoadFile("TestLoader");
-            GameLoader.Load("TestEventListener,1,1,0");
+            this.loader.LoadFile("TestLoader");
+            this.loader.Load("TestEventListener,1,1,0");
             new TypedGameEvent<string>("listener0", "test", "Load file test success");
             new TypedGameEvent<string>("listener1", "test", "Load string test success");
         }

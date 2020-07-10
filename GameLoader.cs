@@ -10,12 +10,17 @@ namespace GenericUnityGame {
     */
     public class GameLoader {
         
-        private static List<GameObject> loaded = new List<GameObject>();
+        private List<GameObject> loaded;
         public static string FILES = "Loadfiles/";
         public static string PREFABS = "Prefabs/";
         public static string SPRITES = "Sprites/";
         public static string AUDIO_CLIPS = "AudioClips/";
-        public static void LoadFile(string file) {
+
+        public GameLoader() {
+            this.loaded = new List<GameObject>();
+        }
+
+        public void LoadFile(string file) {
             TextAsset fileAsset = Resources.Load<TextAsset>(GameLoader.FILES + file);
             if (fileAsset == null) {
                 return;
@@ -24,9 +29,9 @@ namespace GenericUnityGame {
             if (fileText.Length == 0) {
                 return;
             }
-            GameLoader.Load(fileText);
+            this.Load(fileText);
         }
-        public static void Load(string text) {
+        public void Load(string text) {
             while(text.Length > 0) {
                 int index = text.IndexOf('\n');
                 if (text.Length > 1 && text.Substring(0, 2).Equals("//")) {
@@ -34,16 +39,16 @@ namespace GenericUnityGame {
                     continue;
                 }
                 if (index <= 0) {
-                    GameLoader.LoadResource(text.Substring(0));
+                    this.LoadResource(text.Substring(0));
                     break;
                 } else {
-                    GameLoader.LoadResource(text.Substring(0, index));
+                    this.LoadResource(text.Substring(0, index));
                 }
                 text = text.Substring(index + 1);
             }
         }
 
-        private static void LoadResource(string resourceText) {
+        private void LoadResource(string resourceText) {
             if (resourceText.Length == 0) {
                 return;
             }
@@ -61,11 +66,11 @@ namespace GenericUnityGame {
                 float z = float.Parse(resourceText.Substring(0));
                 go.transform.position = new Vector3(x, y, z);
             }
-            loaded.Add(go);
+            this.loaded.Add(go);
         }
 
-        private static void RemoveLoaded() {
-            foreach(GameObject go in loaded) {
+        public void RemoveLoaded() {
+            foreach(GameObject go in this.loaded) {
                 GameObject.Destroy(go);
             }
         }
