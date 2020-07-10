@@ -10,7 +10,6 @@ namespace GenericUnityGame {
 
         private List<string> listeningTo;
         private string listenerId, primaryTimeMultiplier;
-        private static int nextListenerId = 0;
 
         void Start() {
             this.Begin();
@@ -19,12 +18,11 @@ namespace GenericUnityGame {
         // Start is called before the first frame update
         // In extended classes call base.Begin()
         public void Begin()  {
+            this.gameObject.GetComponent<GameEventListenerId>().SetListenerId();
+            this.listenerId = this.gameObject.GetComponent<GameEventListenerId>().GetListenerId();
             this.listeningTo = new List<string>();
-            this.listenerId = "listener" + GameEventListener.nextListenerId;
             this.primaryTimeMultiplier = "default";
-            GameSystem.SetGameData<GameEventListener>(this.listenerId, this);
             this.ListenTo(this.listenerId);
-            GameEventListener.nextListenerId++;
         }
 
         // Update is called once per frame
@@ -66,7 +64,6 @@ namespace GenericUnityGame {
 
         // In extended classes call base.Destroy()
         public void Destroy() {
-            GameSystem.SetGameData<GameEventListener>(this.listenerId, null);
             GameSystem.RemoveGameEventListener(this.listeningTo, this);
         }
 

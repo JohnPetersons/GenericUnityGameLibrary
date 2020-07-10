@@ -18,6 +18,7 @@ namespace GenericUnityGame {
 
         public new void HandleGameEvent(GameEvent gameEvent) {
             if (gameEvent.GetName().Equals(GameAudioStateMachine.PLAY_AUDIO_CLIP)) {
+                source.Stop();
                 source.clip = gameEvent.GetGameData<AudioClip>();
                 source.Play();
             }
