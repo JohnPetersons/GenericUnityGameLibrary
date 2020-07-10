@@ -16,7 +16,7 @@ namespace GenericUnityGame {
 
         public new void Begin() {
             base.Begin();
-            new TypedGameEvent<Sprite>(this.GetEventListenerId(), GameSpriteStateMachine.SPRITE_CHANGE, this.sprite);
+            new TypedGameEvent<Sprite>(this.GetEventListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, GameSpriteStateMachine.SPRITE_CHANGE, this.sprite);
         }
 
         public new void Tick() {
@@ -24,7 +24,7 @@ namespace GenericUnityGame {
             if (this.startTimer >= 0) {
                 this.timer -= GameSystem.GetDeltaTime(Time.deltaTime);
                 if (this.timer <= 0) {
-                    new TypedGameEvent<bool>(this.GetEventListenerId(), GameSpriteState.TIMED_ANIMATION_CHANGE, true);
+                    new TypedGameEvent<bool>(this.GetEventListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, GameSpriteState.TIMED_ANIMATION_CHANGE, true);
                 }
             }
         }

@@ -6,10 +6,12 @@ namespace GenericUnityGame {
     public class GameSpriteStateMachine: GameStateMachine
     { 
         public const string SPRITE_CHANGE = "spriteChange";
+        public const string SPRITE_LISTENER_SUFFIX = "Sprite";
         private SpriteRenderer spriteRenderer;
         public new void Begin() {
             base.Begin();
             this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            this.ListenTo(this.GetListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX);
         }
 
         public new void Tick() {

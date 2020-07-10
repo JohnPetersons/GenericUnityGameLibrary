@@ -6,10 +6,12 @@ namespace GenericUnityGame {
     public class GameAudioStateMachine: GameStateMachine
     { 
         public const string PLAY_AUDIO_CLIP = "playAudioClip";
+        public const string AUDIO_LISTENER_SUFFIX = "Audio";
         private AudioSource source;
         public new void Begin() {
             base.Begin();
             this.source = gameObject.GetComponent<AudioSource>();
+            this.ListenTo(this.GetListenerId() + GameAudioStateMachine.AUDIO_LISTENER_SUFFIX);
         }
 
         public new void Tick() {
