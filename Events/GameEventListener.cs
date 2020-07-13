@@ -10,6 +10,7 @@ namespace GenericUnityGame {
 
         private List<string> listeningTo;
         private string primaryTimeMultiplier;
+        private GameEventListenerId listenerId;
 
         void Start() {
             this.Begin();
@@ -18,10 +19,11 @@ namespace GenericUnityGame {
         // Start is called before the first frame update
         // In extended classes call base.Begin()
         public void Begin()  {
-            this.gameObject.GetComponent<GameEventListenerId>().SetListenerId();
+            this.listenerId = this.gameObject.GetComponent<GameEventListenerId>();
+            this.listenerId.SetListenerId();
             this.listeningTo = new List<string>();
             this.primaryTimeMultiplier = "default";
-            this.ListenTo(this.gameObject.GetComponent<GameEventListenerId>().GetListenerId());
+            this.ListenTo(this.listenerId.GetListenerId());
         }
 
         // Update is called once per frame
@@ -36,7 +38,7 @@ namespace GenericUnityGame {
         }
 
         public string GetListenerId() {
-            return this.gameObject.GetComponent<GameEventListenerId>().GetListenerId();
+            return this.listenerId.GetListenerId();
         }
 
         public string GetPrimaryTimeMultiplier() {
