@@ -10,7 +10,7 @@ namespace GenericUnityGame {
 
         public new void Begin() {
             base.Begin();
-            this.currentCollisions = new List<Collider>();
+            this.currentCollisions = new List<GameObject>();
         }
 
         public new void Tick() {
