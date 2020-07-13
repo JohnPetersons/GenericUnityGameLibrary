@@ -9,8 +9,8 @@ namespace GenericUnityGame {
     */
     public class GameInputState : GameEventListenerState {
 
-        private static readonly string[] BUTTON_INPUTS = {"a", "b", "x", "y", "leftTrigger", "leftBumper", "rightTrigger", "rightBumper", "start", "select"};
-        private static readonly string[] AXIS_INPUTS = {"leftStickUpDown", "rightStickUpDown", "leftStickLeftRight", "rightStickLeftRight", "dPadUpDown", "dPadLeftRight"};
+        private static readonly string[] BUTTON_INPUTS = {"a"};//, "b", "x", "y", "leftTrigger", "leftBumper", "rightTrigger", "rightBumper", "start", "select"};
+        private static readonly string[] AXIS_INPUTS = {"leftStickUpDown"};//, "rightStickUpDown", "leftStickLeftRight", "rightStickLeftRight", "dPadUpDown", "dPadLeftRight"};
         public const string START = "start";
         public const string HELD = "held";
         public const string END = "end";
@@ -21,11 +21,11 @@ namespace GenericUnityGame {
             playerNumber = i;
         }
 
-        public new void Begin() {
+        public override void Begin() {
             base.Begin();
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
             foreach(string str in GameInputState.BUTTON_INPUTS) {
                 string temp = str + playerNumber;

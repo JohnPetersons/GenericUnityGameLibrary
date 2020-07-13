@@ -13,11 +13,11 @@ namespace GenericUnityGame {
             conds = new Dictionary<string, List<GameStateCondition>>();
         }
 
-        public void Begin() {
+        public virtual void Begin() {
             
         }
 
-        public void Tick() {
+        public virtual void Tick() {
             
         }
 

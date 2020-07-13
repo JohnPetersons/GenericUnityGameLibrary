@@ -6,12 +6,13 @@ namespace GenericUnityGame {
     public class GameStateMachine: GameEventListener
     { 
         private List<GameState> currentStates;
-        public new void Begin() {
+        public override void Begin() {
             base.Begin();
+            Debug.Log("test2");
             currentStates = new List<GameState>();
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
             foreach(GameState gs in currentStates) {
                 gs.Tick();
@@ -20,9 +21,10 @@ namespace GenericUnityGame {
 
         public void AddCurrentState(GameState state) {
             this.currentStates.Add(state);
+            state.Begin();
         }
 
-        public new void HandleGameEvent(GameEvent gameEvent) {
+        public override void HandleGameEvent(GameEvent gameEvent) {
             for(int i = 0; i < currentStates.Count; i++) {
                 currentStates[i] = currentStates[i].GetNextState(gameEvent);
             }

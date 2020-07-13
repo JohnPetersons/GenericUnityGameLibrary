@@ -9,7 +9,7 @@ namespace GenericUnityGame {
     */
    public class GameMaster : MonoBehaviour {
         // Start is called before the first frame update
-        public const bool TEST = true;
+        public const bool TEST = false;
 
         private GameLoader loader;
 
@@ -19,6 +19,7 @@ namespace GenericUnityGame {
                 this.Tests();
             }
             loader.LoadFile("MainMenu");
+            GameSystem.SetTimeMultiplier("default", 1.0);
         }
 
         // Update is called once per frame

@@ -17,7 +17,7 @@ namespace GenericUnityGame {
             this.Begin();
         }
 
-        public void Begin() {
+        public virtual void Begin() {
             this.SetListenerId();
         }
 
@@ -40,9 +40,17 @@ namespace GenericUnityGame {
         }
 
         public void SetListenerId(string str) {
-            if (this.listenerId == null || this.listenerId.Length <= 0) {
-                this.listenerId = str;
-                GameSystem.SetGameData<GameObject>(this.listenerId, this.gameObject);
+            GameEventListener[] listeners = gameObject.GetComponents<GameEventListener>();
+            if (this.listenerId != null && this.listenerId.Length > 0) {
+                GameSystem.SetGameData<GameObject>(this.listenerId, null);
+                foreach(GameEventListener gel in listeners) {
+                    gel.StopListeningTo(this.listenerId);
+                }
+            }
+            this.listenerId = str;
+            GameSystem.SetGameData<GameObject>(this.listenerId, this.gameObject);
+            foreach(GameEventListener gel in listeners) {
+                gel.ListenTo(this.listenerId);
             }
         }
 

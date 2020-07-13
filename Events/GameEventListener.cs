@@ -18,7 +18,7 @@ namespace GenericUnityGame {
 
         // Start is called before the first frame update
         // In extended classes call base.Begin()
-        public void Begin()  {
+        public virtual void Begin()  {
             this.listenerId = this.gameObject.GetComponent<GameEventListenerId>();
             this.listenerId.SetListenerId();
             this.listeningTo = new List<string>();
@@ -28,12 +28,10 @@ namespace GenericUnityGame {
 
         // Update is called once per frame
         void Update() {
-            if (GameSystem.GetTimeMultiplier(this.primaryTimeMultiplier) != 0) {
-                this.Tick();
-            }
+            this.Tick();
         }
 
-        public void Tick() {
+        public virtual void Tick() {
 
         }
 
@@ -68,7 +66,7 @@ namespace GenericUnityGame {
             GameSystem.RemoveGameEventListener(this.listeningTo, this);
         }
 
-        public void HandleGameEvent(GameEvent gameEvent) {
+        public virtual void HandleGameEvent(GameEvent gameEvent) {
             if (GameMaster.TEST && gameEvent.GetName().Equals("test")) {
                 Debug.Log(gameEvent.GetGameData<string>());
             }
