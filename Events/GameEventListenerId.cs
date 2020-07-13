@@ -14,6 +14,10 @@ namespace GenericUnityGame {
 
         // Start is called before the first frame update
         void Start() {
+            this.Begin();
+        }
+
+        public void Begin() {
             this.SetListenerId();
         }
 
@@ -31,6 +35,13 @@ namespace GenericUnityGame {
             if (this.listenerId == null || this.listenerId.Length <= 0) {
                 this.listenerId = "listener" + GameEventListenerId.nextListenerId;
                 GameEventListenerId.nextListenerId++;
+                GameSystem.SetGameData<GameObject>(this.listenerId, this.gameObject);
+            }
+        }
+
+        public void SetListenerId(string str) {
+            if (this.listenerId == null || this.listenerId.Length <= 0) {
+                this.listenerId = str;
                 GameSystem.SetGameData<GameObject>(this.listenerId, this.gameObject);
             }
         }
