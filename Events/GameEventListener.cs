@@ -35,6 +35,10 @@ namespace GenericUnityGame {
 
         }
 
+        public void SetListenerId(string str) {
+            this.listenerId.SetListenerId(str);
+        }
+
         public string GetListenerId() {
             return this.listenerId.GetListenerId();
         }
