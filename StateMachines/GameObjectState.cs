@@ -10,11 +10,11 @@ namespace GenericUnityGame {
             this.gameObject = gameObject;
         }
 
-        public new void Begin() {
+        public override void Begin() {
             base.Begin();
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
         }
 

@@ -8,17 +8,18 @@ namespace GenericUnityGame {
         public const string SPRITE_CHANGE = "spriteChange";
         public const string SPRITE_LISTENER_SUFFIX = "Sprite";
         private SpriteRenderer spriteRenderer;
-        public new void Begin() {
+
+        public override void Begin() {
             base.Begin();
             this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             this.ListenTo(this.GetListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX);
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
         }
 
-        public new void HandleGameEvent(GameEvent gameEvent) {
+        public override void HandleGameEvent(GameEvent gameEvent) {
             if (gameEvent.GetName().Equals(GameSpriteStateMachine.SPRITE_CHANGE)) {
                 spriteRenderer.sprite = gameEvent.GetGameData<Sprite>();
             }

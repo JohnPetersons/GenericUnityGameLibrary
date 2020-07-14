@@ -11,7 +11,7 @@ namespace GenericUnityGame {
             this.clip = Resources.Load<AudioClip>(GameLoader.AUDIO_CLIPS + clipName);
         }
 
-        public new void Begin() {
+        public override void Begin() {
             base.Begin();
             new TypedGameEvent<AudioClip>(this.GetEventListenerId() + GameAudioStateMachine.AUDIO_LISTENER_SUFFIX, GameAudioStateMachine.PLAY_AUDIO_CLIP, this.clip);
         }

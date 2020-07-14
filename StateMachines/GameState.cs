@@ -44,7 +44,7 @@ namespace GenericUnityGame {
         The events that are passed to the else statement are for GameStateCondtions that will usually trigger an event
         in the Success function that sends an event that would be caught by the first if statement.
         */
-        public GameState GetNextState(GameEvent gameEvent) {
+        public virtual GameState GetNextState(GameEvent gameEvent) {
             if (states.ContainsKey(gameEvent.GetName())) {
                 states[gameEvent.GetName()].Begin();
                 return states[gameEvent.GetName()];

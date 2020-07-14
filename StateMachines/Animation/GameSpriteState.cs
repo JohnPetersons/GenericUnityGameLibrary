@@ -14,12 +14,12 @@ namespace GenericUnityGame {
             this.timer = 0.0;
         }
 
-        public new void Begin() {
+        public override void Begin() {
             base.Begin();
             new TypedGameEvent<Sprite>(this.GetEventListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, GameSpriteStateMachine.SPRITE_CHANGE, this.sprite);
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
             if (this.startTimer >= 0) {
                 this.timer -= GameSystem.GetDeltaTime(Time.deltaTime);
@@ -35,7 +35,7 @@ namespace GenericUnityGame {
             this.AddStateChange(GameSpriteState.TIMED_ANIMATION_CHANGE, spriteState);
         }
 
-        public new GameState GetNextState(GameEvent gameEvent) {
+        public override GameState GetNextState(GameEvent gameEvent) {
             GameState result = base.GetNextState(gameEvent);
             if (result != this && this.startTimer > 0){
                 this.timer = this.startTimer;

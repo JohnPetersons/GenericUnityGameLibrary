@@ -8,17 +8,18 @@ namespace GenericUnityGame {
         public const string PLAY_AUDIO_CLIP = "playAudioClip";
         public const string AUDIO_LISTENER_SUFFIX = "Audio";
         private AudioSource source;
-        public new void Begin() {
+        
+        public override void Begin() {
             base.Begin();
             this.source = gameObject.GetComponent<AudioSource>();
             this.ListenTo(this.GetListenerId() + GameAudioStateMachine.AUDIO_LISTENER_SUFFIX);
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
         }
 
-        public new void HandleGameEvent(GameEvent gameEvent) {
+        public override void HandleGameEvent(GameEvent gameEvent) {
             if (gameEvent.GetName().Equals(GameAudioStateMachine.PLAY_AUDIO_CLIP)) {
                 source.Stop();
                 source.clip = gameEvent.GetGameData<AudioClip>();

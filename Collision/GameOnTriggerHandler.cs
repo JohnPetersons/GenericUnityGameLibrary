@@ -8,12 +8,12 @@ namespace GenericUnityGame {
 
         private List<GameObject> currentCollisions;
 
-        public new void Begin() {
+        public override void Begin() {
             base.Begin();
             this.currentCollisions = new List<GameObject>();
         }
 
-        public new void Tick() {
+        public override void Tick() {
             base.Tick();
             if (this.currentCollisions.Count > 0) {
                 foreach(GameObject go in this.currentCollisions) {
