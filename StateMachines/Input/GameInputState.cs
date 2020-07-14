@@ -9,11 +9,23 @@ namespace GenericUnityGame {
     */
     public class GameInputState : GameEventListenerState {
 
-        private static readonly string[] BUTTON_INPUTS = {"a"};//, "b", "x", "y", "leftTrigger", "leftBumper", "rightTrigger", "rightBumper", "start", "select"};
-        private static readonly string[] AXIS_INPUTS = {"leftStickUpDown"};//, "rightStickUpDown", "leftStickLeftRight", "rightStickLeftRight", "dPadUpDown", "dPadLeftRight"};
+        public const string A = "a";
+        public const string B = "b";
+        public const string X = "x";
+        public const string Y = "y";
+        public const string LEFT_BUMPER = "leftBumper";
+        public const string RIGHT_BUMPER = "rightBumper";
+        public const string SELECT = "select";
         public const string START = "start";
-        public const string HELD = "held";
-        public const string END = "end";
+        public const string LEFT_STICK_UP_DOWN = "leftStickUpDown";
+        public const string LEFT_STICK_LEFT_RIGHT = "leftStickLeftRight";
+        private static readonly string[] BUTTON_INPUTS = {A, B, X, Y, LEFT_BUMPER, RIGHT_BUMPER, SELECT, START};
+        private static readonly string[] AXIS_INPUTS = {LEFT_STICK_UP_DOWN, LEFT_STICK_LEFT_RIGHT}; 
+        // The below strings are for axis I am not currently implementing
+        // "leftTrigger", "rightTrigger", "rightStickUpDown", "rightStickLeftRight", "dPadUpDown", "dPadLeftRight"
+        public const string KEY_DOWN = "down";
+        public const string KEY_HELD = "held";
+        public const string KEY_UP = "up";
         private Dictionary<string, string> inputMapping = new Dictionary<string, string>();
         private int playerNumber;
 
@@ -30,11 +42,11 @@ namespace GenericUnityGame {
             foreach(string str in GameInputState.BUTTON_INPUTS) {
                 string temp = str + playerNumber;
                 if (Input.GetButtonDown(temp) && inputMapping.ContainsKey(temp)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.START);
+                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.KEY_DOWN);
                 } else if (Input.GetButton(temp) && inputMapping.ContainsKey(temp)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.HELD);
+                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.KEY_HELD);
                 } else if (Input.GetButtonUp(temp) && inputMapping.ContainsKey(temp)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.END);
+                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.KEY_UP);
                 }
             } 
             foreach(string str in GameInputState.AXIS_INPUTS) {
@@ -46,15 +58,24 @@ namespace GenericUnityGame {
             }
         }
 
+        /*
+        In order for an input event to be created an input mapping for that input must be created.
+        Example: SetInputMapping(GameInputState.LEFT_STICK_UP_DOWN, "leftStick");
+            This example will create an event that people listening to listener tag given to this class
+            using "leftStick" as the event name.  For axis input types the data will be a double representing
+            the position on the axis, in this case up or down.  For button input types the data will be a string
+            of either KEY_DOWN, KEY_HELD, or KEY_UP.
+        */
         public void SetInputMapping(string input, string mapping) {
-            if (inputMapping.ContainsKey(input)) {
+            string str = input + this.playerNumber;
+            if (inputMapping.ContainsKey(str)) {
                 if (mapping == null || mapping.Length <= 0) {
-                    inputMapping.Remove(input);
+                    inputMapping.Remove(str);
                 } else {
-                    inputMapping[input] = mapping;
+                    inputMapping[str] = mapping;
                 }
             } else {
-                inputMapping.Add(input, mapping);
+                inputMapping.Add(str, mapping);
             }
         }
     }
