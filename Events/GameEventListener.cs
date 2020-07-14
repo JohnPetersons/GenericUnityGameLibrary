@@ -10,7 +10,7 @@ namespace GenericUnityGame {
 
         private List<string> listeningTo;
         private string primaryTimeMultiplier;
-        private GameEventListenerId listenerId;
+        protected GameEventListenerId listenerId;
 
         void Start() {
             this.Begin();

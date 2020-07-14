@@ -29,7 +29,7 @@ namespace GenericUnityGame {
         private Dictionary<string, string> inputMapping = new Dictionary<string, string>();
         private int playerNumber;
 
-        public GameInputState(string listener, int i): base(listener) {
+        public GameInputState(GameEventListenerId listener, int i): base(listener) {
             playerNumber = i;
         }
 

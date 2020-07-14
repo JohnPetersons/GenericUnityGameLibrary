@@ -5,8 +5,8 @@ using UnityEngine;
 namespace GenericUnityGame {
     public class GameEventListenerState: GameState
     { 
-        private string listenerId;
-        public GameEventListenerState(string listenerId): base() {
+        private GameEventListenerId listenerId;
+        public GameEventListenerState(GameEventListenerId listenerId): base() {
             this.listenerId = listenerId;
         }
 
@@ -19,7 +19,7 @@ namespace GenericUnityGame {
         }
 
         public string GetEventListenerId() {
-            return this.listenerId;
+            return this.listenerId.GetListenerId();
         }
     }
 }

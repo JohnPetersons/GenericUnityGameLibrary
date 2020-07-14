@@ -7,7 +7,7 @@ namespace GenericUnityGame {
 
         private AudioClip clip;
 
-        public GameAudioState(string listenerId, string clipName): base(listenerId) {
+        public GameAudioState(GameEventListenerId listenerId, string clipName): base(listenerId) {
             this.clip = Resources.Load<AudioClip>(GameLoader.AUDIO_CLIPS + clipName);
         }
 

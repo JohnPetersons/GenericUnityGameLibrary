@@ -14,7 +14,7 @@ namespace GenericUnityGame {
         public static string FILES = "Loadfiles/";
         public static string PREFABS = "Prefabs/";
         public static string SPRITES = "Sprites/";
-        public static string AUDIO_CLIPS = "Audio/";
+        public static string AUDIO = "Audio/";
 
         public GameLoader() {
             this.loaded = new List<GameObject>();
