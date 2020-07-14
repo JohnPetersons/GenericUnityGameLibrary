@@ -9,8 +9,10 @@ namespace GenericUnityGame {
     public class GameEventListener : MonoBehaviour {
 
         private List<string> listeningTo;
+        private List<string> suffixes;
         private string primaryTimeMultiplier;
         protected GameEventListenerId listenerId;
+        private string lastListenerId;
 
         void Start() {
             this.Begin();
@@ -21,7 +23,9 @@ namespace GenericUnityGame {
         public virtual void Begin()  {
             this.listenerId = this.gameObject.GetComponent<GameEventListenerId>();
             this.listenerId.SetListenerId();
+            this.lastListenerId = this.listenerId.GetListenerId();
             this.listeningTo = new List<string>();
+            this.suffixes = new List<string>();
             this.primaryTimeMultiplier = "default";
             this.ListenTo(this.listenerId.GetListenerId());
         }
@@ -35,12 +39,24 @@ namespace GenericUnityGame {
 
         }
 
+        public void AddSuffix(string str) {
+            this.suffixes.Add(str);
+            this.ListenTo(this.listenerId.GetListenerId() + str);
+        }
+
         public void SetListenerId(string str) {
             this.listenerId.SetListenerId(str);
         }
 
         public string GetListenerId() {
-            return this.listenerId.GetListenerId();
+            string result = this.listenerId.GetListenerId();
+            if (result != this.lastListenerId && this.suffixes.Count > 0) {
+                foreach(string suffix in this.suffixes) {
+                    this.StopListeningTo(this.lastListenerId + suffix);
+                    this.ListenTo(result + suffix);
+                }
+            }
+            return result;
         }
 
         public string GetPrimaryTimeMultiplier() {

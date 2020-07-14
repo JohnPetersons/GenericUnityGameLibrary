@@ -7,8 +7,6 @@ namespace GenericUnityGame {
     instead you use TypedGameEvent<T>(tag, name. data) which is cleaner to me
     */
     public class TypedGameEvent<T>: GameEvent {
-        private string tag, name;
-        private GameData data;
 
         public TypedGameEvent(string tag, string name, T data): base(tag, name, new TypedGameData<T>(data)) {
 

@@ -28,5 +28,9 @@ namespace GenericUnityGame {
         public K GetGameData<K>() {
             return ((TypedGameData<K>)data).GetData();
         }
+
+        public Type GetGameDataType() {
+            return data.GetDataType();
+        }
     }
 }
