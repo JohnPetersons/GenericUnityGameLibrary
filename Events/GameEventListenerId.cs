@@ -11,6 +11,8 @@ namespace GenericUnityGame {
         
         private string listenerId;
         private static int nextListenerId = 0;
+        private List<string> suffixes;
+        private Dictionary<string, GameEventListener> suffixesToListeners;
 
         // Start is called before the first frame update
         void Start() {
@@ -19,6 +21,7 @@ namespace GenericUnityGame {
 
         public virtual void Begin() {
             this.SetListenerId();
+            this.suffixes = new List<string>();
         }
 
         // Update is called once per frame
@@ -29,6 +32,16 @@ namespace GenericUnityGame {
         // In extended classes call base.Destroy()
         public void Destroy() {
             GameSystem.SetGameData<GameObject>(this.listenerId, null);
+        }
+
+        public void AddEventListenerToSuffix(string suffix, GameEventListener gel) {
+            if (!this.suffixes.Contains(suffix)) {
+                this.suffixes.Add(suffix);
+                this.suffixesToListeners.Add(suffix, new List<GameEventListener>());
+            }
+            if (!this.suffixesToListeners[suffix].Contains(gel)) {
+                this.suffixesToListeners[suffix].Add(gel);
+            }
         }
 
         public void SetListenerId() {
@@ -46,11 +59,21 @@ namespace GenericUnityGame {
                 foreach(GameEventListener gel in listeners) {
                     gel.StopListeningTo(this.listenerId);
                 }
+                foreach(string suffix in this.suffixes) {
+                    foreach(GameEventListener gel in this.suffixesToListeners[suffix]) {
+                        gel.StopListeningTo(this.listenerId + suffix);
+                    }
+                }
             }
             this.listenerId = str;
             GameSystem.SetGameData<GameObject>(this.listenerId, this.gameObject);
             foreach(GameEventListener gel in listeners) {
                 gel.ListenTo(this.listenerId);
+            }
+            foreach(string suffix in this.suffixes) {
+                foreach(GameEventListener gel in this.suffixesToListeners[suffix]) {
+                    gel.ListenTo(this.listenerId + suffix);
+                }
             }
         }
 

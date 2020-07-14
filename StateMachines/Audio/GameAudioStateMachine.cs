@@ -12,7 +12,7 @@ namespace GenericUnityGame {
         public override void Begin() {
             base.Begin();
             this.source = gameObject.GetComponent<AudioSource>();
-            this.AddSuffix(GameAudioStateMachine.AUDIO_LISTENER_SUFFIX);
+            this.listenerId.AddEventListenerToSuffix(GameAudioStateMachine.AUDIO_LISTENER_SUFFIX, this);
         }
 
         public override void Tick() {
