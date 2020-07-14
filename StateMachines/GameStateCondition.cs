@@ -4,10 +4,11 @@ using System.Collections.Generic;
 namespace GenericUnityGame {
     public abstract class GameStateCondition {
 
-        private string sendTo, eventOnSuccess;
+        private GameEventListenerId sendTo;
+        private string eventOnSuccess;
 
         private List<string> listensFor;
-        public GameStateCondition(string sendTo, string eventOnSuccess) {
+        public GameStateCondition(GameEventListenerId sendTo, string eventOnSuccess) {
             this.sendTo = sendTo;
             this.eventOnSuccess = eventOnSuccess;
             this.listensFor = new List<string>();
@@ -22,7 +23,7 @@ namespace GenericUnityGame {
         }
 
         public void Success() {
-            new TypedGameEvent<bool>(sendTo, eventOnSuccess, true);
+            new TypedGameEvent<bool>(sendTo.GetListenerId(), eventOnSuccess, true);
         }
         public abstract bool CheckCond(GameEvent gameEvent);
     }

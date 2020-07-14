@@ -29,6 +29,12 @@ namespace GenericUnityGame {
             }
         }
 
+        public void RemoveStateChange(string eventName) {
+            if (states.ContainsKey(eventName)) {
+                states.Remove(eventName);
+            }
+        }
+
         public void AddGameStateCondition(GameStateCondition cond) {
             foreach(string str in cond.GetListensFor()) {
                 if (!conds.ContainsKey(str)) {
