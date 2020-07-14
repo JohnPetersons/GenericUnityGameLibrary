@@ -45,6 +45,16 @@ namespace GenericUnityGame {
             }
         }
 
+        public void RemoveEventListenerIdFromSuffix(string suffix, GameEventListener gel) {
+            if (this.suffixes.Contains(suffix) && this.suffixesToListeners[suffix].Contains(gel)) {
+                this.suffixesToListeners[suffix].Remove(gel);
+                if (this.suffixesToListeners[suffix].Count <= 0) {
+                    this.suffixesToListeners.Remove(suffix);
+                    this.suffixes.Remove(suffix);
+                }
+            }
+        }
+
         public void SetListenerId() {
             if (this.listenerId == null || this.listenerId.Length <= 0) {
                 this.listenerId = "listener" + GameEventListenerId.nextListenerId;
