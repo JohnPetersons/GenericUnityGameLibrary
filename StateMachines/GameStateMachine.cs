@@ -8,7 +8,6 @@ namespace GenericUnityGame {
         private List<GameState> currentStates;
         public override void Begin() {
             base.Begin();
-            Debug.Log("test2");
             currentStates = new List<GameState>();
         }
 

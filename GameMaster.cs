@@ -25,7 +25,6 @@ namespace GenericUnityGame {
         // Update is called once per frame
         void Update() {
             GameSystem.Update();
-            this.loader.RemoveLoaded();
         }
 
         private void Tests() {
