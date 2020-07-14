@@ -12,7 +12,7 @@ namespace GenericUnityGame {
         public override void Begin() {
             base.Begin();
             this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            this.ListenTo(this.GetListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX);
+            this.listenerId.AddEventListenerToSuffix(GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, this);
         }
 
         public override void Tick() {

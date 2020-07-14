@@ -12,7 +12,7 @@ namespace GenericUnityGame {
         private string listenerId;
         private static int nextListenerId = 0;
         private List<string> suffixes;
-        private Dictionary<string, GameEventListener> suffixesToListeners;
+        private Dictionary<string, List<GameEventListener>> suffixesToListeners;
 
         // Start is called before the first frame update
         void Start() {
@@ -22,6 +22,7 @@ namespace GenericUnityGame {
         public virtual void Begin() {
             this.SetListenerId();
             this.suffixes = new List<string>();
+            this.suffixesToListeners = new Dictionary<string, List<GameEventListener>>();
         }
 
         // Update is called once per frame
