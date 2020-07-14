@@ -37,6 +37,8 @@ namespace GenericUnityGame {
         public override void HandleGameEvent(GameEvent gameEvent) {
             base.HandleGameEvent(gameEvent);
             if (gameEvent.GetName().Equals("startMatch")) {
+                this.loader.RemoveLoaded();
+                loader.LoadFile("Game");
                 Debug.Log(gameEvent.GetGameData<string>());
             } else if (gameEvent.GetName().Equals("mainMenu")) {
                 Debug.Log(gameEvent.GetGameData<string>());

@@ -41,21 +41,25 @@ namespace GenericUnityGame {
             base.Tick();
             foreach(string str in GameInputState.BUTTON_INPUTS) {
                 string temp = str + playerNumber;
-                if (Input.GetButtonDown(temp) && inputMapping.ContainsKey(temp)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.KEY_DOWN);
-                } else if (Input.GetButton(temp) && inputMapping.ContainsKey(temp)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.KEY_HELD);
-                } else if (Input.GetButtonUp(temp) && inputMapping.ContainsKey(temp)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[temp], GameInputState.KEY_UP);
+                if (Input.GetButtonDown(temp) && inputMapping.ContainsKey(str)) {
+                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[str], GameInputState.KEY_DOWN);
+                } else if (Input.GetButton(temp) && inputMapping.ContainsKey(str)) {
+                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[str], GameInputState.KEY_HELD);
+                } else if (Input.GetButtonUp(temp) && inputMapping.ContainsKey(str)) {
+                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[str], GameInputState.KEY_UP);
                 }
             } 
             foreach(string str in GameInputState.AXIS_INPUTS) {
                 string temp = str + playerNumber;
-                if (Input.GetAxis(temp) != 0 && inputMapping.ContainsKey(temp)) {
+                if (Input.GetAxis(temp) != 0 && inputMapping.ContainsKey(str)) {
                     double val = Input.GetAxis(temp);
-                    new TypedGameEvent<double>(this.GetEventListenerId(), inputMapping[temp], Math.Max(-1.0, Math.Min(1.0, val)));
+                    new TypedGameEvent<double>(this.GetEventListenerId(), inputMapping[str], Math.Max(-1.0, Math.Min(1.0, val)));
                 }
             }
+        }
+
+        public void SetPlayerNumber(int i) {
+            this.playerNumber = i;
         }
 
         /*
@@ -67,15 +71,14 @@ namespace GenericUnityGame {
             of either KEY_DOWN, KEY_HELD, or KEY_UP.
         */
         public void SetInputMapping(string input, string mapping) {
-            string str = input + this.playerNumber;
-            if (inputMapping.ContainsKey(str)) {
+            if (inputMapping.ContainsKey(input)) {
                 if (mapping == null || mapping.Length <= 0) {
-                    inputMapping.Remove(str);
+                    inputMapping.Remove(input);
                 } else {
-                    inputMapping[str] = mapping;
+                    inputMapping[input] = mapping;
                 }
             } else {
-                inputMapping.Add(str, mapping);
+                inputMapping.Add(input, mapping);
             }
         }
     }
