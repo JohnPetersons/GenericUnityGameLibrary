@@ -20,7 +20,9 @@ namespace GenericUnityGame {
         public virtual void Begin()  {
             this.listenerId = this.gameObject.GetComponent<GameEventListenerId>();
             this.listenerId.SetListenerId();
-            this.listeningTo = new List<string>();
+            if (this.listeningTo == null) {
+                this.listeningTo = new List<string>();
+            }
             this.ListenTo(this.listenerId.GetListenerId());
         }
 
@@ -42,6 +44,9 @@ namespace GenericUnityGame {
         }
 
         public void ListenTo(string tag) {
+            if (this.listeningTo == null) {
+                this.listeningTo = new List<string>();
+            }
             if (!this.listeningTo.Contains(tag)) {
                 this.listeningTo.Add(tag);
                 GameSystem.AddGameEventListener(tag, this);
@@ -49,6 +54,9 @@ namespace GenericUnityGame {
         }
 
         public void StopListeningTo(string tag) {
+            if (this.listeningTo == null) {
+                this.listeningTo = new List<string>();
+            }
             if (this.listeningTo.Contains(tag)) {
                 this.listeningTo.Remove(tag);
                 GameSystem.RemoveGameEventListener(tag, this);
