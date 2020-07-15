@@ -51,7 +51,7 @@ namespace GenericUnityGame {
             } 
             foreach(string str in GameInputState.AXIS_INPUTS) {
                 string temp = str + playerNumber;
-                if (Input.GetAxis(temp) != 0 && inputMapping.ContainsKey(str)) {
+                if (inputMapping.ContainsKey(str)) {
                     double val = Input.GetAxis(temp);
                     new TypedGameEvent<double>(this.GetListenerId(), inputMapping[str], Math.Max(-1.0, Math.Min(1.0, val)));
                 }
