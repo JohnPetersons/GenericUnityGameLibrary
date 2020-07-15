@@ -47,12 +47,22 @@ namespace GenericUnityGame {
 
         public static void RemoveGameEventListener(List<string> tags, GameEventListener eventListener) {
             foreach(string tag in tags) {
-                eventListeners[tag].Remove(eventListener);
+                if (eventListeners.ContainsKey(tag)) {
+                    eventListeners[tag].Remove(eventListener);
+                }
             }
         }
 
         public static void RemoveGameEventListener(string tag, GameEventListener eventListener) {
-            eventListeners[tag].Remove(eventListener);
+            if (eventListeners.ContainsKey(tag)) {
+                eventListeners[tag].Remove(eventListener);
+            }
+        }
+
+        public static void RemoveEventTag(string tag) {
+            if (eventListeners.ContainsKey(tag)) {
+                eventListeners.Remove(tag);
+            }
         }
 
         public static bool GameDataIsType<T>(string tag) {

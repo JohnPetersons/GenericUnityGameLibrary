@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GenericUnityGame {
     public abstract class GameStateCondition {
 
-        private GameEventListenerId sendTo;
+        protected GameEventListenerId sendTo;
         private string eventOnSuccess;
         protected GameObject gameObject;
 

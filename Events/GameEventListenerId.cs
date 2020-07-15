@@ -33,8 +33,16 @@ namespace GenericUnityGame {
         }
 
         // In extended classes call base.Destroy()
-        public void Destroy() {
+        void Destroy() {
+            this.OnDestroy();
+        }
+
+        public virtual void OnDestroy() {
             GameSystem.SetGameData<GameObject>(this.listenerId, null);
+            GameSystem.RemoveEventTag(this.listenerId);
+            foreach(string str in this.suffixes) {
+                GameSystem.RemoveEventTag(this.listenerId + str);
+            }
         }
 
         public void AddEventListenerToSuffix(string suffix, GameEventListener gel) {
@@ -44,6 +52,7 @@ namespace GenericUnityGame {
             }
             if (!this.suffixesToListeners[suffix].Contains(gel)) {
                 this.suffixesToListeners[suffix].Add(gel);
+                gel.ListenTo(this.listenerId + suffix);
             }
         }
 

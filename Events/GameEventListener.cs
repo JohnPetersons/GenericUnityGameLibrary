@@ -64,7 +64,11 @@ namespace GenericUnityGame {
         }
 
         // In extended classes call base.Destroy()
-        public void Destroy() {
+        void Destroy() {
+            this.OnDestroy();
+        }
+
+        public virtual void OnDestroy() {
             GameSystem.RemoveGameEventListener(this.listeningTo, this);
         }
 
