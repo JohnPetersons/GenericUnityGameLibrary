@@ -22,12 +22,13 @@ namespace GenericUnityGame {
             }
         }
 
-        private void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter2D(Collider2D other) {
+            Debug.Log("trigger enter");
             new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerEnter", other.gameObject);
             this.currentCollisions.Add(other.gameObject);
         } 
 
-        private void OnTriggerExit(Collider other) {
+        private void OnTriggerExit2D(Collider2D other) {
             new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerExit", other.gameObject);
             this.currentCollisions.Remove(other.gameObject);
         }

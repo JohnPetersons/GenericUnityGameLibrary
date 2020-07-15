@@ -21,8 +21,10 @@ namespace GenericUnityGame {
 
         public virtual void Begin() {
             this.SetListenerId();
-            this.suffixes = new List<string>();
-            this.suffixesToListeners = new Dictionary<string, List<GameEventListener>>();
+            if (this.suffixes == null) {
+                this.suffixes = new List<string>();
+                this.suffixesToListeners = new Dictionary<string, List<GameEventListener>>(); 
+            }
         }
 
         // Update is called once per frame
@@ -65,6 +67,10 @@ namespace GenericUnityGame {
 
         public void SetListenerId(string str) {
             GameEventListener[] listeners = gameObject.GetComponents<GameEventListener>();
+            if (this.suffixes == null) {
+                this.suffixes = new List<string>();
+                this.suffixesToListeners = new Dictionary<string, List<GameEventListener>>(); 
+            }
             if (this.listenerId != null && this.listenerId.Length > 0) {
                 GameSystem.SetGameData<GameObject>(this.listenerId, null);
                 foreach(GameEventListener gel in listeners) {
