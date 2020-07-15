@@ -23,7 +23,6 @@ namespace GenericUnityGame {
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("trigger enter");
             new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerEnter", other.gameObject);
             this.currentCollisions.Add(other.gameObject);
         } 
