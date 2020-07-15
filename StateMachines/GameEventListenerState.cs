@@ -20,7 +20,7 @@ namespace GenericUnityGame {
             base.Tick();
         }
 
-        public string GetEventListenerId() {
+        public string GetListenerId() {
             return this.listenerId.GetListenerId();
         }
     }

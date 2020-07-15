@@ -13,7 +13,7 @@ namespace GenericUnityGame {
 
         public override void Begin() {
             base.Begin();
-            new TypedGameEvent<AudioClip>(this.GetEventListenerId() + GameAudioStateMachine.AUDIO_LISTENER_SUFFIX, GameAudioStateMachine.PLAY_AUDIO_CLIP, this.clip);
+            new TypedGameEvent<AudioClip>(this.GetListenerId() + GameAudioStateMachine.AUDIO_LISTENER_SUFFIX, GameAudioStateMachine.PLAY_AUDIO_CLIP, this.clip);
         }
     }
 }

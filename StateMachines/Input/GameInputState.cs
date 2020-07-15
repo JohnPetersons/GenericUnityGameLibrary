@@ -42,18 +42,18 @@ namespace GenericUnityGame {
             foreach(string str in GameInputState.BUTTON_INPUTS) {
                 string temp = str + playerNumber;
                 if (Input.GetButtonDown(temp) && inputMapping.ContainsKey(str)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[str], GameInputState.KEY_DOWN);
+                    new TypedGameEvent<string>(this.GetListenerId(), inputMapping[str], GameInputState.KEY_DOWN);
                 } else if (Input.GetButton(temp) && inputMapping.ContainsKey(str)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[str], GameInputState.KEY_HELD);
+                    new TypedGameEvent<string>(this.GetListenerId(), inputMapping[str], GameInputState.KEY_HELD);
                 } else if (Input.GetButtonUp(temp) && inputMapping.ContainsKey(str)) {
-                    new TypedGameEvent<string>(this.GetEventListenerId(), inputMapping[str], GameInputState.KEY_UP);
+                    new TypedGameEvent<string>(this.GetListenerId(), inputMapping[str], GameInputState.KEY_UP);
                 }
             } 
             foreach(string str in GameInputState.AXIS_INPUTS) {
                 string temp = str + playerNumber;
                 if (Input.GetAxis(temp) != 0 && inputMapping.ContainsKey(str)) {
                     double val = Input.GetAxis(temp);
-                    new TypedGameEvent<double>(this.GetEventListenerId(), inputMapping[str], Math.Max(-1.0, Math.Min(1.0, val)));
+                    new TypedGameEvent<double>(this.GetListenerId(), inputMapping[str], Math.Max(-1.0, Math.Min(1.0, val)));
                 }
             }
         }
