@@ -13,6 +13,10 @@ namespace GenericUnityGame {
             double deltaTime = GameSystem.GetTimeMultiplier("gameplay", Time.deltaTime);
     */
     public class GameSystem {
+
+        public const string GAMEPLAY = "gameplay";
+        public const string DEFAULT = "default";
+
         private static Dictionary<string, List<GameEventListener>> eventListeners = new Dictionary<string, List<GameEventListener>>();
         private static List<GameEvent> events = new List<GameEvent>();
         private static Dictionary<string, GameData> data = new Dictionary<string, GameData>();
@@ -23,7 +27,7 @@ namespace GenericUnityGame {
             GameSystem.events = new List<GameEvent>();
             GameSystem.data = new Dictionary<string, GameData>();
             GameSystem.timeMultipliers = new Dictionary<string, double>();
-            GameSystem.timeMultipliers.Add("default", 1.0);
+            GameSystem.timeMultipliers.Add(GameSystem.DEFAULT, 1.0);
         }
 
         public static void AddGameEvent(GameEvent gameEvent) {
@@ -93,7 +97,7 @@ namespace GenericUnityGame {
         }
 
         public static double GetDeltaTime(double deltaTime) {
-            return deltaTime * timeMultipliers["default"];
+            return deltaTime * timeMultipliers[GameSystem.DEFAULT];
         }
 
         public static double GetDeltaTime(string tag, double deltaTime) {
