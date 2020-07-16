@@ -27,10 +27,10 @@ namespace GenericUnityGame {
         public const string KEY_HELD = "held";
         public const string KEY_UP = "up";
         private Dictionary<string, string> inputMapping = new Dictionary<string, string>();
-        private int playerNumber;
+        private int gamepadNumber;
 
         public GameInputState(GameEventListenerId listener, int i): base(listener) {
-            playerNumber = i;
+            gamepadNumber = i;
         }
 
         public override void Begin() {
@@ -40,7 +40,7 @@ namespace GenericUnityGame {
         public override void Tick() {
             base.Tick();
             foreach(string str in GameInputState.BUTTON_INPUTS) {
-                string temp = str + playerNumber;
+                string temp = str + gamepadNumber;
                 if (Input.GetButtonDown(temp) && inputMapping.ContainsKey(str)) {
                     new TypedGameEvent<string>(this.GetListenerId(), inputMapping[str], GameInputState.KEY_DOWN);
                 } else if (Input.GetButton(temp) && inputMapping.ContainsKey(str)) {
@@ -50,7 +50,7 @@ namespace GenericUnityGame {
                 }
             } 
             foreach(string str in GameInputState.AXIS_INPUTS) {
-                string temp = str + playerNumber;
+                string temp = str + gamepadNumber;
                 if (inputMapping.ContainsKey(str)) {
                     double val = Input.GetAxis(temp);
                     new TypedGameEvent<double>(this.GetListenerId(), inputMapping[str], Math.Max(-1.0, Math.Min(1.0, val)));
@@ -58,8 +58,8 @@ namespace GenericUnityGame {
             }
         }
 
-        public void SetPlayerNumber(int i) {
-            this.playerNumber = i;
+        public void SetGamepadNumber(int i) {
+            this.gamepadNumber = i;
         }
 
         /*

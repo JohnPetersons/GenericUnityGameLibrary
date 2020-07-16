@@ -13,6 +13,7 @@ namespace GenericUnityGame {
         public const string TAG = "gameMaster";
 
         private GameLoader testLoader, loader;
+        private double timePerFrame, timePerFrameCount;
 
         public override void Begin() {
             base.Begin();
@@ -24,14 +25,24 @@ namespace GenericUnityGame {
             }
             this.loader = new GameLoader();
             this.loader.LoadFile("MainMenu");
+            this.timePerFrameCount = 0.0;
+            this.SetFramerate(60);
         }
 
         // Update is called once per frame
         public override void Tick() {
-            GameSystem.Update();
+            this.timePerFrame -= Time.deltaTime;
+            if (this.timePerFrameCount <= 0) {
+                GameSystem.Update();
+                this.timePerFrameCount += this.timePerFrame;
+            }
             if (GameMaster.TEST) {
                 this.testLoader.RemoveLoaded();
             }
+        }
+
+        public void SetFramerate(double d) {
+            this.timePerFrame = 1.0 / d;
         }
 
         public override void HandleGameEvent(GameEvent gameEvent) {
