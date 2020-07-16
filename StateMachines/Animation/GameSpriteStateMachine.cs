@@ -19,6 +19,11 @@ namespace GenericUnityGame {
             base.Tick();
         }
 
+        public override void OnDestroy() {
+            base.OnDestroy();
+            GameSystem.RemoveGameEventListener(this.listenerId.GetListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, this);
+        }
+
         public override void HandleGameEvent(GameEvent gameEvent) {
             if (gameEvent.GetName().Equals(GameSpriteStateMachine.SPRITE_CHANGE)) {
                 spriteRenderer.sprite = gameEvent.GetGameData<Sprite>();

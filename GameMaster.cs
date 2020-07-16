@@ -50,7 +50,6 @@ namespace GenericUnityGame {
             if (gameEvent.GetName().Equals("startMatch")) {
                 this.loader.RemoveLoaded();
                 this.loader.LoadFile("Game");
-                Debug.Log(gameEvent.GetGameData<string>());
             } else if (gameEvent.GetName().Equals("mainMenu")) {
                 this.loader.RemoveLoaded();
                 this.loader.LoadFile("MainMenu");

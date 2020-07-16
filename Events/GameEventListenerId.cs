@@ -39,13 +39,13 @@ namespace GenericUnityGame {
 
         public virtual void OnDestroy() {
             GameSystem.SetGameData<GameObject>(this.listenerId, null);
-            GameSystem.RemoveEventTag(this.listenerId);
-            foreach(string str in this.suffixes) {
-                GameSystem.RemoveEventTag(this.listenerId + str);
-            }
         }
 
         public void AddEventListenerToSuffix(string suffix, GameEventListener gel) {
+            if (this.suffixes == null) {
+                this.suffixes = new List<string>();
+                this.suffixesToListeners = new Dictionary<string, List<GameEventListener>>(); 
+            }
             if (!this.suffixes.Contains(suffix)) {
                 this.suffixes.Add(suffix);
                 this.suffixesToListeners.Add(suffix, new List<GameEventListener>());
