@@ -21,8 +21,8 @@ namespace GenericUnityGame {
 
         public override void Tick() {
             base.Tick();
-            if (this.startTimer >= 0) {
-                this.timer -= GameSystem.GetDeltaTime(Time.deltaTime);
+            if (this.startTimer > 0) {
+                this.timer -= GameSystem.GetDeltaTime(GameSystem.GAMEPLAY, Time.deltaTime);
                 if (this.timer <= 0) {
                     new TypedGameEvent<bool>(this.GetListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, GameSpriteState.TIMED_ANIMATION_CHANGE, true);
                 }
