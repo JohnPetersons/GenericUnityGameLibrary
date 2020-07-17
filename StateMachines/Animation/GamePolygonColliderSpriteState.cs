@@ -17,7 +17,20 @@ namespace GenericUnityGame {
             this.collider = this.gameObject.GetComponent<PolygonCollider2D>();
         }
 
+        public GamePolygonColliderSpriteState(GameEventListenerId listenerId, string spriteName, double firstSequenceLength): base(listenerId, spriteName, firstSequenceLength) {
+            this.colliderPoints = new Vector2[] {new Vector2(0.5f, 0.5f),
+                new Vector2(0.5f, -0.5f),
+                new Vector2(-0.5f, -0.5f),
+                new Vector2(-0.5f, 0.5f)}; 
+            this.collider = this.gameObject.GetComponent<PolygonCollider2D>();
+        }
+
         public GamePolygonColliderSpriteState(GameEventListenerId listenerId, string spriteName, Vector2[] colliderPoints): base(listenerId, spriteName) {
+            this.colliderPoints = colliderPoints; 
+            this.collider = this.gameObject.GetComponent<PolygonCollider2D>();
+        }
+
+        public GamePolygonColliderSpriteState(GameEventListenerId listenerId, string spriteName, double firstSequenceLength, Vector2[] colliderPoints): base(listenerId, spriteName, firstSequenceLength) {
             this.colliderPoints = colliderPoints; 
             this.collider = this.gameObject.GetComponent<PolygonCollider2D>();
         }

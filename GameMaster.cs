@@ -13,7 +13,7 @@ namespace GenericUnityGame {
         public const string TAG = "gameMaster";
 
         private GameLoader testLoader, loader;
-        private double timePerFrame, timePerFrameCount;
+        private bool loaded;
 
         public override void Begin() {
             base.Begin();
@@ -25,34 +25,31 @@ namespace GenericUnityGame {
             }
             this.loader = new GameLoader();
             this.loader.LoadFile("MainMenu");
-            this.timePerFrameCount = 0.0;
-            this.SetFramerate(60);
+            this.loaded = false;
         }
 
         // Update is called once per frame
         public override void Tick() {
-            this.timePerFrame -= Time.deltaTime;
-            if (this.timePerFrameCount <= 0) {
-                GameSystem.Update();
-                this.timePerFrameCount += this.timePerFrame;
-            }
+            GameSystem.Update();
             if (GameMaster.TEST) {
                 this.testLoader.RemoveLoaded();
             }
         }
 
-        public void SetFramerate(double d) {
-            this.timePerFrame = 1.0 / d;
-        }
-
         public override void HandleGameEvent(GameEvent gameEvent) {
             base.HandleGameEvent(gameEvent);
-            if (gameEvent.GetName().Equals("startMatch")) {
-                this.loader.RemoveLoaded();
-                this.loader.LoadFile("Game");
-            } else if (gameEvent.GetName().Equals("mainMenu")) {
-                this.loader.RemoveLoaded();
-                this.loader.LoadFile("MainMenu");
+            if (this.loaded) {
+                if (gameEvent.GetName().Equals("startMatch")) {
+                    this.loader.RemoveLoaded();
+                    this.loader.LoadFile("Game");
+                    this.loaded = false;
+                } else if (gameEvent.GetName().Equals("mainMenu")) {
+                    this.loader.RemoveLoaded();
+                    this.loader.LoadFile("MainMenu");
+                    this.loaded = false;
+                }
+            } else if (gameEvent.GetName().Equals("loaded")) {
+                this.loaded = true;
             }
         }
 
