@@ -63,7 +63,6 @@ namespace GenericUnityGame {
             }
         }
 
-        // In extended classes call base.Destroy()
         void Destroy() {
             this.OnDestroy();
         }
@@ -73,9 +72,7 @@ namespace GenericUnityGame {
         }
 
         public virtual void HandleGameEvent(GameEvent gameEvent) {
-            if (GameMaster.TEST && gameEvent.GetName().Equals("test")) {
-                Debug.Log(gameEvent.GetGameData<string>());
-            }
+            
         }
     }
 }

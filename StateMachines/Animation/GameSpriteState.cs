@@ -55,12 +55,10 @@ namespace GenericUnityGame {
             if (this.sequenceIndex >= 0) {
                 this.sequenceTimer += GameSystem.GetDeltaTime(GameSystem.GAMEPLAY, Time.deltaTime);
                 if (this.sequenceTimer > this.sequenceTimers[this.sequenceIndex]) {
-                    Debug.Log("2");
                     this.sequenceTimer = 0;
                     this.sequenceIndex += 1;
                     if (this.sequenceIndex >= this.sequence.Count) {
                         this.sequenceIndex = 0;
-                        Debug.Log("3");
                     }
                     new TypedGameEvent<Sprite>(this.GetListenerId() + GameSpriteStateMachine.SPRITE_LISTENER_SUFFIX, GameSpriteStateMachine.SPRITE_CHANGE, this.sequence[this.sequenceIndex]);
                 }
