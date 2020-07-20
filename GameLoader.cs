@@ -71,7 +71,9 @@ namespace GenericUnityGame {
 
         public void RemoveLoaded() {
             foreach(GameObject go in this.loaded) {
-                GameObject.Destroy(go);
+                if (go != null) {
+                    GameObject.Destroy(go);
+                }
             }
         }
     }
