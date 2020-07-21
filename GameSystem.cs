@@ -42,6 +42,12 @@ namespace GenericUnityGame {
             }
         }
 
+        public static void AddPriorityGameEvent(GameEvent gameEvent) {
+            if (!events.Contains(gameEvent)) {
+                events.Insert(0, gameEvent);
+            }
+        }
+
         public static void AddGameEventListener(string tag, GameEventListener listener) {
             if (!eventListeners.ContainsKey(tag)) {
                 eventListeners.Add(tag, new List<GameEventListener>());

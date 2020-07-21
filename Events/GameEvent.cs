@@ -10,11 +10,15 @@ namespace GenericUnityGame {
         private string tag, name;
         private GameData data;
 
-        public GameEvent(string tag, string name, GameData data) {
+        public GameEvent(string tag, string name, GameData data, bool priority) {
             this.tag = tag;
             this.name = name;
             this.data = data;
-            GameSystem.AddGameEvent(this);
+            if (priority) {
+                GameSystem.AddPriorityGameEvent(this);
+            } else {
+                GameSystem.AddGameEvent(this);
+            }
         }
 
         public string GetTag() {

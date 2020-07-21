@@ -17,18 +17,18 @@ namespace GenericUnityGame {
             base.Tick();
             if (this.currentCollisions.Count > 0) {
                 foreach(GameObject go in this.currentCollisions) {
-                    new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerStay", go);
+                    new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerStay", go, true);
                 }
             }
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
-            new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerEnter", other.gameObject);
+            new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerEnter", other.gameObject, true);
             this.currentCollisions.Add(other.gameObject);
         } 
 
         private void OnTriggerExit2D(Collider2D other) {
-            new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerExit", other.gameObject);
+            new TypedGameEvent<GameObject>(this.GetListenerId(), "triggerExit", other.gameObject, true);
             this.currentCollisions.Remove(other.gameObject);
         }
     }

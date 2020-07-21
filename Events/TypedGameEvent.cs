@@ -8,7 +8,11 @@ namespace GenericUnityGame {
     */
     public class TypedGameEvent<T>: GameEvent {
 
-        public TypedGameEvent(string tag, string name, T data): base(tag, name, new TypedGameData<T>(data)) {
+        public TypedGameEvent(string tag, string name, T data): base(tag, name, new TypedGameData<T>(data), false) {
+
+        }
+
+        public TypedGameEvent(string tag, string name, T data, bool priority): base(tag, name, new TypedGameData<T>(data), priority) {
 
         }
     }
