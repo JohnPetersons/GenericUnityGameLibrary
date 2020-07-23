@@ -19,8 +19,10 @@ namespace GenericUnityGame {
         public const string START = "start";
         public const string LEFT_STICK_UP_DOWN = "leftStickUpDown";
         public const string LEFT_STICK_LEFT_RIGHT = "leftStickLeftRight";
+        public const string D_PAD_LEFT_RIGHT = "dPadLeftRight";
+        public const string D_PAD_UP_DOWN = "dPadUpDown";
         private static readonly string[] BUTTON_INPUTS = {A, B, X, Y, LEFT_BUMPER, RIGHT_BUMPER, SELECT, START};
-        private static readonly string[] AXIS_INPUTS = {LEFT_STICK_UP_DOWN, LEFT_STICK_LEFT_RIGHT}; 
+        private static readonly string[] AXIS_INPUTS = {LEFT_STICK_UP_DOWN, LEFT_STICK_LEFT_RIGHT, D_PAD_LEFT_RIGHT, D_PAD_UP_DOWN}; 
         // The below strings are for axis I am not currently implementing
         // "leftTrigger", "rightTrigger", "rightStickUpDown", "rightStickLeftRight", "dPadUpDown", "dPadLeftRight"
         public const string KEY_DOWN = "down";
