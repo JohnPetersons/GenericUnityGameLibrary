@@ -59,15 +59,16 @@ namespace GenericUnityGame {
 
         public static void RemoveGameEventListener(List<string> tags, GameEventListener eventListener) {
             foreach(string tag in tags) {
-                if (eventListeners.ContainsKey(tag)) {
-                    eventListeners[tag].Remove(eventListener);
-                }
+                GameSystem.RemoveGameEventListener(tag, eventListener);
             }
         }
 
         public static void RemoveGameEventListener(string tag, GameEventListener eventListener) {
             if (eventListeners.ContainsKey(tag)) {
                 eventListeners[tag].Remove(eventListener);
+            }
+            if (eventListeners[tag].Count == 0) {
+                GameSystem.RemoveEventTag(tag);
             }
         }
 

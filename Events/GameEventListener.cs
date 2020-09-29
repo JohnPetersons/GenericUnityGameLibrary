@@ -23,7 +23,7 @@ namespace GenericUnityGame {
             if (this.listeningTo == null) {
                 this.listeningTo = new List<string>();
             }
-            this.ListenTo(this.listenerId.GetListenerId());
+            this.ListenTo(this);
         }
 
         // Update is called once per frame
