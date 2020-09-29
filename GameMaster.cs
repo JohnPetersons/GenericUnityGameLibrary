@@ -7,6 +7,8 @@ namespace GenericUnityGame {
     /*
     Mostly just to call GameSystem.Update() and be attached to an empty GameObject.
     Also does some basic testing to make sure I didn't break things
+
+    TODO: Move some of the game specific stuff to a child class
     */
    public class GameMaster : GameEventListener {
         // Start is called before the first frame update

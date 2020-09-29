@@ -53,13 +53,55 @@ namespace GenericUnityGame {
             }
         }
 
-        public void StopListeningTo(string tag) {
+        public void ListenTo(GameEventListener gel) {
             if (this.listeningTo == null) {
                 this.listeningTo = new List<string>();
+            }
+            if (!this.listeningTo.Contains(gel.GetListenerId())) {
+                this.listeningTo.Add(gel.GetListenerId());
+                GameSystem.AddGameEventListener(gel.GetListenerId(), this);
+            }
+        }
+
+        public void ListenTo(GameObject go) {
+            if (this.listeningTo == null) {
+                this.listeningTo = new List<string>();
+            }
+            GameEventListenerId gelID = go.GetComponent<GameEventListenerId>();
+            if (gelID != null && !this.listeningTo.Contains(gelID.GetListenerId())) {
+                this.listeningTo.Add(gelID.GetListenerId());
+                GameSystem.AddGameEventListener(gelID.GetListenerId(), this);
+            }
+        }
+
+        public void StopListeningTo(string tag) {
+            if (this.listeningTo == null) {
+                return;
             }
             if (this.listeningTo.Contains(tag)) {
                 this.listeningTo.Remove(tag);
                 GameSystem.RemoveGameEventListener(tag, this);
+            }
+        }
+
+        public void StopListeningTo(GameEventListener gel) {
+            if (this.listeningTo == null) {
+                return;
+            }
+            if (this.listeningTo.Contains(gel.GetListenerId())) {
+                this.listeningTo.Remove(gel.GetListenerId());
+                GameSystem.RemoveGameEventListener(gel.GetListenerId(), this);
+            }
+        }
+
+        public void StopListeningTo(GameObject go) {
+            if (this.listeningTo == null) {
+                return;
+            }
+            GameEventListenerId gelID = go.GetComponent<GameEventListenerId>();
+            if (gelID != null && this.listeningTo.Contains(gelID.GetListenerId())) {
+                this.listeningTo.Remove(gelID.GetListenerId());
+                GameSystem.RemoveGameEventListener(gelID.GetListenerId(), this);
             }
         }
 
